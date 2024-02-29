@@ -1,0 +1,24 @@
+.itemFrame {
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftInfo {
+    display: flex;
+    gap: 10px;
+}
+
+.itemInfo {
+    width: 100%;
+}
+
+.qtyInfo {
+    display: flex; 
+    gap: .5rem;
+    align-items: center;
+    font-weight: 800;
+}
+
+.location, .qtyInfo {
+    color: rgb(138, 138, 138);
+}

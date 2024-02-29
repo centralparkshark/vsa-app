@@ -1,0 +1,117 @@
+
+:root {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark; */
+  color: #d5d5d5;
+  background-color: #242424;
+  background: linear-gradient(180deg, black 0%, #2B2B2B 100%);
+  background-repeat: no-repeat;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+} 
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border: none;
+  padding: 0.5rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: #434141;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
+  color: #d9d9d9;
+  border-radius: 45px;
+  width: 100%;
+}
+
+.title {
+    font-size: 1.8rem;
+}
+
+.bento {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  padding: 6vw;
+}
+
+.box { 
+  padding: 20px;
+  background: #282828;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2vh;
+}
+
+.box-2 {
+  padding: 20px;
+  background: #282828;
+  border-radius: 10px;
+  width: 100%;
+  gap: 2vh;
+}
+
+h1 {
+  padding: 1vw;
+}
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h4 {
+font-size: 1.2rem;
+}
+
+label {
+font-size: 1.2rem
+}
+
+ul {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+input {
+  line-height: 1.6rem;
+  background-color: #c3c1c1;
+  border: none;
+  border-radius: 50px;
+  padding: 0px 10px;
+  max-width: 240px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
