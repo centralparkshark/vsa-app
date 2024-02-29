@@ -1,4 +1,4 @@
-import { db } from '../../firebase-config';
+import { db } from '../../../firebase-config';
 import { collection, addDoc} from 'firebase/firestore';
 import { useState } from 'react';
 import Popup from 'reactjs-popup';

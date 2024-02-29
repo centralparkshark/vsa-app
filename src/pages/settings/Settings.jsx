@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 
 import {doc, setDoc} from 'firebase/firestore'
-import {db, auth} from '../../firebase-config';
-
+import { db, auth } from "../../../firebase-config";
 
 function Settings() {
     //gotta refix this changing system
