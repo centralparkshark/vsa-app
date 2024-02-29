@@ -10,13 +10,13 @@ import {getAuth} from 'firebase/auth'
 // Your web app's Firebase configuration
 //should use an env file to hide api keys
 const firebaseConfig = {
-  apiKey: "AIzaSyA5fl3ZRMnuSoneg4v8wKhF77x6uAsjG1U",
-  authDomain: "hhcrestock.firebaseapp.com",
-  projectId: "hhcrestock",
-  storageBucket: "hhcrestock.appspot.com",
-  messagingSenderId: "162745579623",
-  appId: "1:162745579623:web:192a17fcf3090767cb3cc2",
-  measurementId: "G-K77TR80V19"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
