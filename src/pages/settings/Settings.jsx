@@ -5,7 +5,6 @@ import {doc, setDoc} from 'firebase/firestore'
 import { db, auth } from "../../../firebase-config";
 
 function Settings() {
-    //gotta refix this changing system
     const [nameInput, setNameInput] = useState(""); //dont edit og state
     const [success, setSuccess] = useState("");
     
@@ -38,7 +37,7 @@ function Settings() {
                 <input
                     type="text"
                     value={nameInput}
-                    //want to set min input
+                    //to-do: want to set min input
                     onChange={(e) => setNameInput(e.target.value)}
                     placeholder="Enter new name"
                 />
@@ -46,8 +45,6 @@ function Settings() {
                 <button onClick={handleSignOut}>Sign Out</button>
             </div>
         </div>
-        //only setting it needs rn is name change and save button
-        //dont know how to export name yet
     );
 }
 

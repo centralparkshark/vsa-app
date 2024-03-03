@@ -12,7 +12,7 @@
     width: 100%;
 }
 
-.qtyInfo {
+.qtyInfo, .numNeededInfo {
     display: flex; 
     gap: .5rem;
     align-items: center;

@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-//import {db} from './firebase-config';
-//import {collection, getDocs} from 'firebase/firestore';
-
 
 import {onAuthStateChanged} from 'firebase/auth';
 import { auth } from '../../firebase-config';
@@ -13,8 +10,6 @@ import PublicOnlyRoute from '../components/PublicOnlyRoute';
 import PrivateRoute from '../components/PrivateRoute';
 
 function App() {
-  // const [inventory, setInventory] = useState([]);
-  // const inventoryCollRef = collection(db, "inventory")
   const {setLoginStatus} = useStore();
   
   useEffect(() => {
@@ -23,12 +18,6 @@ function App() {
     });
 
     return () => unsub(); 
-
-  //   const getInventory = async () => {
-  //     const data = await getDocs(inventoryCollRef);
-  //     setInventory(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-  //   };
-  //   getInventory()
   }, [])
 
   return (

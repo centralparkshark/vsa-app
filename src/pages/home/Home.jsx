@@ -5,10 +5,10 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db, auth } from '../../../firebase-config';
 import { useEffect, useState } from 'react';
 import Loading from '../../components/loading/Loading';
-import SectionFocus from '../../components/SectionFocus';
+import SectionFocus from './SectionFocus'
+import TaskList from './TaskList';
 
-
-let restockNum = 22; //need to get from backend logic
+let restockNum = 23; //need to get from backend logic
 
 function Home() {
     const current =  new Date();
@@ -54,24 +54,15 @@ function Home() {
             
         {/*TO-DO: make a working to-do list section*/}
         <div className="box">
-            <ul>
-                <SectionFocus />
-                {/*
-                should be checkboxes
-                allowed to add as many tasks as possible
-                gray out and strike through finished 
-                */}
-                <li>Reminder: hi</li> 
-                <li>Dust Shelves</li>
-                <li>test 3</li>
-            </ul>
+            <SectionFocus />
+            <TaskList />
         </div>
         
         {/*TO-DO: have restock num actually generate*/}
         <div className='box restock items-center'>
-            <h2>
-                {restockNum} items needed
-            </h2>
+                {restockNum > 1 ? <h2>{restockNum} items needed</h2> : 
+                restockNum === 1 && <h2>{restockNum} item needed</h2>}
+
             <Link to='/restock'> 
                 <button className="restock--button px-4 py-1 text-3xl" style={{color: '#D31145', background: '#d5d5d5'}}>Restock</button>
             </Link> 
