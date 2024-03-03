@@ -21,12 +21,16 @@ function Restock() {
                 const fetchedItems = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    fetchedItems.push({
-                        sku: doc.id,
+                    const newItem = {
+                        id: doc.id,
+                        sku: data.itemSKU,
                         name: data.itemName,
                         restockNeeded: data.restockNeeded,
                         totalItemQty: data.totalItemQty,
-                    });
+                    }
+                    if (newItem.restockNeeded > 0) {
+                        fetchedItems.push(newItem);
+                    }
                 });
                 setItemFrames(fetchedItems);
             } catch (error) {
@@ -40,15 +44,18 @@ function Restock() {
     return (
         <div className="bento">
             <Link to='/home'><p>Back</p></Link>
-            <CSVUploader></CSVUploader>
-            <h1 className="title">Items Needed:</h1>
-            <div className="bento p-0">
-                {/* //need to render one for each w/ restock value > their restock limit */}
-                {itemFrames.map(item => (
-                    <ItemFrame key={item.sku} itemName={item.name} restockNeeded={item.restockNeeded} totalItemQty={item.totalItemQty}/>
-                ))}
+            {itemFrames.length === 0 && <div className="f text-center bg-red-800">All items collected!</div>}
+            {itemFrames.length > 0 && <div>
+                <h1 className="title">Items Needed:</h1>
+                <div className="bento p-0">
+                    {/* //need to render one for each w/ restock value > their restock limit */}
+                    {itemFrames.map(item => (
+                        <ItemFrame key={item.id} sku={item.sku} itemName={item.name} restockNeeded={item.restockNeeded} totalItemQty={item.totalItemQty}/>
+                    ))}
+                </div>
+            </div>}
 
-            </div>
+            <CSVUploader></CSVUploader>
 
         </div>
     )

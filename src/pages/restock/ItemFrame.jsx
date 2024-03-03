@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-const ItemFrame = ({itemName, restockNeeded, totalItemQty}) => {
+const ItemFrame = ({sku, itemName, restockNeeded, totalItemQty}) => {
   return (
-    <div className="itemFrame box-2">
-                    <div className="leftInfo">
-                        <img src="https://picsum.photos/50" alt="" />
+    <Link to = {`/restock/${sku}`}>
+        <div className="itemFrame box-2">
+            <div className="leftInfo">
+                <img src="https://picsum.photos/50" alt="" />
                         <div className="itemInfo">
                             <h3 className="itemName">{itemName}</h3>
                             <h4 className="location">Location</h4>
@@ -19,8 +21,9 @@ const ItemFrame = ({itemName, restockNeeded, totalItemQty}) => {
                             <p>Qty:</p>
                             <p>{totalItemQty}</p>
                         </div>
-                    </div>
-                </div>
+        </div>
+    </div>
+    </Link>
   )
 }
 

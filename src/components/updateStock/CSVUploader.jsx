@@ -53,7 +53,7 @@ const changeButton = () => {
 
   if (needUpload)  {
     return (
-        <button onClick={changeButton}>Update Data</button>
+        <button className='bg-slate-100 w-1/6 text-gray-700' onClick={changeButton}>Update Data</button>
     )
   } else {
   return (
