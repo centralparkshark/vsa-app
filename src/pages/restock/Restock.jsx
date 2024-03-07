@@ -7,15 +7,16 @@ import { useEffect, useState } from 'react';
 import { db } from '../../../firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
 
-
+// import Loading from '../../components/loading/Loading';
 
 function Restock() {
     
     const [itemFrames, setItemFrames] = useState([]);
-    
-
+   // const [isLoading, setIsLoading] = useState(false)
+   
     useEffect(() => {
         const fetchData = async () => {
+            //setIsLoading(true)
             try {
                 const querySnapshot = await getDocs(collection(db, "inventory"));
                 const fetchedItems = [];
@@ -23,10 +24,13 @@ function Restock() {
                     const data = doc.data();
                     const newItem = {
                         id: doc.id,
-                        sku: data.itemSKU,
-                        name: data.itemName,
+                        itemSKU: data.itemSKU,
+                        itemName: data.itemName,
                         restockNeeded: data.restockNeeded,
                         totalItemQty: data.totalItemQty,
+                        backstockLocation: data.backstockLocation,
+                        itemPic: data.itemPic,
+                        //to-do: figure out photo adding logic
                     }
                     if (newItem.restockNeeded > 0) {
                         fetchedItems.push(newItem);
@@ -35,12 +39,19 @@ function Restock() {
                 setItemFrames(fetchedItems);
             } catch (error) {
                 console.error('Error retrieving items:', error);
-            }
+            } // finally {
+            //     setIsLoading(false)
+            // }
         };
     
         fetchData();
     }, []);
     
+    // if (isLoading === true) {
+    //     return (<Loading />)
+    // }
+    console.log(itemFrames)
+
     return (
         <div className="bento">
             <Link to='/home'><p>Back</p></Link>
@@ -50,7 +61,7 @@ function Restock() {
                 <div className="bento p-0">
                     {/* //need to render one for each w/ restock value > their restock limit */}
                     {itemFrames.map(item => (
-                        <ItemFrame key={item.id} sku={item.sku} itemName={item.name} restockNeeded={item.restockNeeded} totalItemQty={item.totalItemQty}/>
+                        <ItemFrame key={item.id} {...item}/>
                     ))}
                 </div>
             </div>}

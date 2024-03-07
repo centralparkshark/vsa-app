@@ -1,15 +1,36 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-const ItemFrame = ({sku, itemName, restockNeeded, totalItemQty}) => {
+
+const ItemFrame = (props) => {
+  
+//   //DOM refs
+//   wrapper // holds everything
+//   itemFrame //holds data
+//   backgroundLeft // holds quick check  function
+//   backgroundRight // holds edit function
+
+
+  const {itemSKU, itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, ...item} = props
+
   return (
-    <Link to = {`/restock/${sku}`}>
+    <Link className="wrapper" to = {`/restock/${itemSKU}`} {...item}>
+        {/* <div className='backgroundLeft'>
+            <span>Check</span>
+        </div>
+        <div className="backgroundRight">
+            <span>Edit</span>
+        </div> */}
         <div className="itemFrame box-2">
             <div className="leftInfo">
-                <img src="https://picsum.photos/50" alt="" />
+                {itemPic ? 
+                <img src={itemPic} alt={itemName} /> : 
+                <img src="https://picsum.photos/50" alt="randomly generated" />
+                } 
                         <div className="itemInfo">
                             <h3 className="itemName">{itemName}</h3>
-                            <h4 className="location">Location</h4>
+                            <h4 className="location">{backstockLocation}</h4>
                         </div>
                     </div>
                     <div className="rightInfo">
@@ -21,18 +42,42 @@ const ItemFrame = ({sku, itemName, restockNeeded, totalItemQty}) => {
                             <p>Qty:</p>
                             <p>{totalItemQty}</p>
                         </div>
+            </div>
         </div>
-    </div>
     </Link>
   )
 }
 
 ItemFrame.propTypes = {
-    sku: PropTypes.string,
+    id: PropTypes.string,
+    itemSKU: PropTypes.string,
     itemName: PropTypes.string,
     restockNeeded: PropTypes.number,
     totalItemQty: PropTypes.number,
-
+    backstockLocation: PropTypes.array,
+    itemPic: PropTypes.string,
 }
+
+//To-Do: Use this to create a dragable cards eventually
+//https://malcoded.com/posts/react-swipeable-list/
+// constructor(props) {
+//     super(props);
+
+//     this.itemFrame = null;
+//     this.wrapper = null;
+//     this.backgroundLeft = null;
+//     this.backgroundRight = null;
+
+//     this.onMouseMove = this.onMouseMove.bind(this);
+//     this.onTouchMove = this.onTouchMove.bind(this);
+//     this.onDragStartMouse = this.onDragStartMouse.bind(this);
+//     this.onDragStartTouch = this.onDragStartTouch.bind(this);
+//     this.onDragEndMouse = this.onDragEndMouse.bind(this);
+//     this.onDragEndTouch = this.onDragEndTouch.bind(this);
+//     this.onDragEnd = this.onDragEnd.bind(this);
+//     this.updatePosition = this.updatePosition.bind(this);
+//     this.onSwiped= this.onSwiped.bind(this);
+//   }
+
 
 export default ItemFrame

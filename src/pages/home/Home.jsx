@@ -7,10 +7,30 @@ import { useEffect, useState } from 'react';
 import Loading from '../../components/loading/Loading';
 import SectionFocus from './SectionFocus'
 import TaskList from './TaskList';
+import Cards from './Cards';
+import Sidebar from './Sidebar';
 
-let restockNum = 23; //need to get from backend logic
+let restockNum = 23; //to-do: need to get from backend logic
+
+
+let navBar;
+function screenSize(width) {
+    if (width.matches) { //less than 60em
+        navBar = <Cards />
+    } else {
+        //TO-DO: change to render sidebar
+        navBar = <Cards /> 
+        // navBar = <Sidebar />
+    }
+}
+
+var width = window.matchMedia("(max-width: 60em)")
+
+
 
 function Home() {
+    screenSize(width);
+
     const current =  new Date();
     const month = current.toLocaleString('default', { month: 'long' });
     const today = `${month} ${current.getDate()}, ${current.getFullYear()}`;
@@ -67,13 +87,13 @@ function Home() {
                 <button className="restock--button px-4 py-1 text-3xl" style={{color: '#D31145', background: '#d5d5d5'}}>Restock</button>
             </Link> 
             {/*TO-DO: make inv part of a bar at the bottom*/}
-            <Link to='/inv'> 
-                <button className="inv--button px-4 py-1 text-3xl" style={{color: '#D31145', background: '#d5d5d5'}}>Inventory</button>
-            </Link> 
+            
         </div>
+        <div>{navBar}</div>
         <div className='center flex justify-center'>
             <img className="logo h-16 w-16" alt="Heinz History Center Cog Logo" src={hhclogo} />
         </div>
+        
     </div>
    )
 }

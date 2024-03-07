@@ -30,6 +30,9 @@ const CSVUploader = () => {
                         itemSKU: sku, // results.data[i][2]
                         totalItemQty: Number(results.data[i][12]),
                         restockNeeded: Number(results.data[i][5]),
+                        backstockLocation: [],
+                        itemPic: "",
+
                     }
                     addNewItem(newItemInfo) // add item to db
                    // do some funky math too!
@@ -44,6 +47,7 @@ const CSVUploader = () => {
       setNeedUpload(true)        
       
       //reload what needs restocked
+      //to-do: reload once everything is updated
   }
 
   

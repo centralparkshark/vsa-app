@@ -16,6 +16,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 
 * {
   margin: 0;
@@ -69,6 +73,13 @@ button {
   border-radius: 10px;
   width: 100%;
   gap: 2vh;
+}
+
+.card {
+  padding: 1rem;
+  background-color: #494949;
+  border-radius: 10px;
+  text-align: center;
 }
 
 h1 {
