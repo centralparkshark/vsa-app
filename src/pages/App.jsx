@@ -28,7 +28,7 @@ function App() {
           <Route path="/home" element = {<PrivateRoute Component={Home}/>}/>
           <Route path="/inv" element = {<PrivateRoute Component={Inventory}/>}/>
           <Route path="/restock" element = {<PrivateRoute Component={Restock}/>}/>
-          <Route path="/restock/:itemId" element = {<PrivateRoute Component={ItemPage}/>}/>
+          <Route path="/restock/:itemSKU" element = {<PrivateRoute Component={ItemPage}/>}/>
           <Route path="/settings" element = {<PrivateRoute Component={Settings}/>}/>
           <Route path="*" element = {<NoPage />}/>
         </Routes>

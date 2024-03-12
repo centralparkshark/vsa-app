@@ -27,12 +27,13 @@ function Restock() {
                         itemSKU: data.itemSKU,
                         itemName: data.itemName,
                         restockNeeded: data.restockNeeded,
+                        restockLimit: data.restockLimit,
                         totalItemQty: data.totalItemQty,
                         backstockLocation: data.backstockLocation,
                         itemPic: data.itemPic,
                         //to-do: figure out photo adding logic
                     }
-                    if (newItem.restockNeeded > 0) {
+                    if (newItem.restockNeeded >= newItem.restockLimit) {
                         fetchedItems.push(newItem);
                     }
                 });
@@ -50,8 +51,6 @@ function Restock() {
     // if (isLoading === true) {
     //     return (<Loading />)
     // }
-    console.log(itemFrames)
-
     return (
         <div className="bento">
             <Link to='/home'><p>Back</p></Link>
@@ -61,7 +60,9 @@ function Restock() {
                 <div className="bento p-0">
                     {/* //need to render one for each w/ restock value > their restock limit */}
                     {itemFrames.map(item => (
-                        <ItemFrame key={item.id} {...item}/>
+                        <Link  key={item.id} to = {`/restock/${item.itemSKU}`} {...item}>
+                            <ItemFrame item={item}/>
+                        </Link>
                     ))}
                 </div>
             </div>}

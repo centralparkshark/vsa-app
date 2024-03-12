@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 
-const ItemFrame = (props) => {
-  
+const ItemFrame = ({item}) => {
 //   //DOM refs
 //   wrapper // holds everything
 //   itemFrame //holds data
@@ -12,10 +10,10 @@ const ItemFrame = (props) => {
 //   backgroundRight // holds edit function
 
 
-  const {itemSKU, itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, ...item} = props
+  const { itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, } = item
 
   return (
-    <Link className="wrapper" to = {`/restock/${itemSKU}`} {...item}>
+    <div className="wrapper" >
         {/* <div className='backgroundLeft'>
             <span>Check</span>
         </div>
@@ -44,18 +42,21 @@ const ItemFrame = (props) => {
                         </div>
             </div>
         </div>
-    </Link>
+    </div>
   )
 }
 
 ItemFrame.propTypes = {
-    id: PropTypes.string,
-    itemSKU: PropTypes.string,
-    itemName: PropTypes.string,
-    restockNeeded: PropTypes.number,
-    totalItemQty: PropTypes.number,
-    backstockLocation: PropTypes.array,
-    itemPic: PropTypes.string,
+    item: PropTypes.shape({
+        id: PropTypes.string,
+        itemSKU: PropTypes.string,
+        itemName: PropTypes.string,
+        restockNeeded: PropTypes.number,
+        restockLimit: PropTypes.number,
+        totalItemQty: PropTypes.number,
+        backstockLocation: PropTypes.array,
+        itemPic: PropTypes.string,
+    })
 }
 
 //To-Do: Use this to create a dragable cards eventually

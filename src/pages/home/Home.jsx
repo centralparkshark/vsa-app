@@ -14,6 +14,7 @@ let restockNum = 23; //to-do: need to get from backend logic
 
 
 let navBar;
+//to-do: have this change on resize?
 function screenSize(width) {
     if (width.matches) { //less than 60em
         navBar = <Cards />
@@ -72,19 +73,31 @@ function Home() {
             Hi, <br/> {displayName}!
         </h1>
             
-        {/*TO-DO: make a working to-do list section*/}
         <div className="box">
             <SectionFocus />
+        </div>
+        {/*TO-DO: make a working to-do list section*/}
+        <div className="box">
             <TaskList />
         </div>
         
+        
+
+        {/*TO-DO: only generate either of these if not zero */}
         {/*TO-DO: have restock num actually generate*/}
         <div className='box restock items-center'>
                 {restockNum > 1 ? <h2>{restockNum} items needed</h2> : 
                 restockNum === 1 && <h2>{restockNum} item needed</h2>}
 
             <Link to='/restock'> 
-                <button className="restock--button px-4 py-1 text-3xl" style={{color: '#D31145', background: '#d5d5d5'}}>Restock</button>
+                <button className="restock--button px-4 py-1 text-3xl">Restock</button>
+            </Link> 
+
+            {/*To-DO: Link to online pull numbers and fix link*/}
+            {restockNum > 1 ? <h2>{restockNum} items needed</h2> : 
+                restockNum === 1 && <h2>{restockNum} item needed</h2>}
+            <Link to=''> 
+                <button className="online--button px-4 py-1 text-3xl">Online Pull</button>
             </Link> 
             {/*TO-DO: make inv part of a bar at the bottom*/}
             

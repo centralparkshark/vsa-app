@@ -30,6 +30,7 @@ const CSVUploader = () => {
                         itemSKU: sku, // results.data[i][2]
                         totalItemQty: Number(results.data[i][12]),
                         restockNeeded: Number(results.data[i][5]),
+                        restockLimit: 1,
                         backstockLocation: [],
                         itemPic: "",
 
