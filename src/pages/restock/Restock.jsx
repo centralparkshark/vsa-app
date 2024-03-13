@@ -7,12 +7,13 @@ import { useEffect, useState } from 'react';
 import { db } from '../../../firebase-config';
 import {collection, getDocs} from 'firebase/firestore';
 
-// import Loading from '../../components/loading/Loading';
+import Loading from '../../components/loading/Loading';
+//To-Do: loading doesnt work 
 
 function Restock() {
     
     const [itemFrames, setItemFrames] = useState([]);
-   // const [isLoading, setIsLoading] = useState(false)
+   const [isLoading, setIsLoading] = useState(false)
    
     useEffect(() => {
         const fetchData = async () => {
@@ -40,17 +41,17 @@ function Restock() {
                 setItemFrames(fetchedItems);
             } catch (error) {
                 console.error('Error retrieving items:', error);
-            } // finally {
-            //     setIsLoading(false)
-            // }
+            } finally {
+                 setIsLoading(false)
+            }
         };
     
         fetchData();
     }, []);
     
-    // if (isLoading === true) {
-    //     return (<Loading />)
-    // }
+    if (isLoading === true) {
+        return (<Loading />)
+    }
     return (
         <div className="bento">
             <Link to='/home'><p>Back</p></Link>
@@ -60,9 +61,10 @@ function Restock() {
                 <div className="bento p-0">
                     {/* //need to render one for each w/ restock value > their restock limit */}
                     {itemFrames.map(item => (
-                        <Link  key={item.id} to = {`/restock/${item.itemSKU}`} {...item}>
-                            <ItemFrame item={item}/>
-                        </Link>
+
+                        // <Link  key={item.id} to = {`/restock/${item.id}`}>
+                            <ItemFrame key={item.id} item={item}/>
+                        //</Link>
                     ))}
                 </div>
             </div>}

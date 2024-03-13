@@ -8,7 +8,7 @@ import Loading from '../../components/loading/Loading';
 import SectionFocus from './SectionFocus'
 import TaskList from './TaskList';
 import Cards from './Cards';
-import Sidebar from './Sidebar';
+//import Sidebar from './Sidebar';
 
 let restockNum = 23; //to-do: need to get from backend logic
 

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
-// import { useState } from 'react'
-
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '../../../firebase-config'
+import { useState } from 'react'
 
 const ItemFrame = ({item}) => {
 //   //DOM refs
@@ -9,11 +10,29 @@ const ItemFrame = ({item}) => {
 //   backgroundLeft // holds quick check  function
 //   backgroundRight // holds edit function
 
+    const { itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, } = item
+    const [visible, setVisible] = useState(true)
 
-  const { itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, } = item
+    const handleClick = async () => {
+        
+        //set restockNeeded to 0
+        const itemRef = doc(db, 'inventory', item.id)
+        //search database by id        
+        try {
+            await updateDoc(itemRef, {
+                restockNeeded: 0,
+            },
+            setVisible(false)
+            );
+        } catch (error) {
+            console.error('Error getting document: ', error)
+        }    
+    }
 
-  return (
-    <div className="wrapper" >
+
+
+  return visible ? (
+    <div className="wrapper" onClick={handleClick}>
         {/* <div className='backgroundLeft'>
             <span>Check</span>
         </div>
@@ -43,7 +62,7 @@ const ItemFrame = ({item}) => {
             </div>
         </div>
     </div>
-  )
+  ) : null;
 }
 
 ItemFrame.propTypes = {
