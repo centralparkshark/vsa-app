@@ -5,9 +5,10 @@ const updateItem = async (newInfo, oldInfo) => {
   const oldInfoId = oldInfo.id;
   const itemRef = doc(db, "inventory", oldInfoId)
 
-  const newItemQty = parseInt(newInfo[12]);
+  const newItemQty = parseInt(newInfo[12].replace(/,/g, ''));
   const oldRestockNum = parseInt(oldInfo.data().restockNeeded)
-  const newRestockNum = oldRestockNum + parseInt(newInfo[5]);
+  //to-do: not sure that this logic is entirely correct
+  const newRestockNum = oldRestockNum + parseInt(newInfo[5].replace(/,/g, ''));
 
   try {
     if (oldInfo.data().totalItemQty != newItemQty) {
