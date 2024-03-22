@@ -60,11 +60,8 @@ function Restock() {
                 <h1 className="title">Items Needed:</h1>
                 <div className="bento p-0">
                     {/* //need to render one for each w/ restock value > their restock limit */}
-                    {itemFrames.map(item => (
-
-                        // <Link  key={item.id} to = {`/restock/${item.id}`}>
-                            <ItemFrame key={item.id} item={item}/>
-                        //</Link>
+                    {itemFrames.map(item => (  
+                        <ItemFrame key={item.id} item={item}/>
                     ))}
                 </div>
             </div>}

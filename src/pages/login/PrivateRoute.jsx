@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import useStore from "../pages/login/store";
+import useStore from "./store";
 import PropTypes from 'prop-types'; // Import PropTypes
 
 const PrivateRoute = ({Component}) => {

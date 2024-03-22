@@ -3,12 +3,16 @@ import { Link } from "react-router-dom"
 const Cards = () => {
   return (
     <div className="grid grid-cols-2 gap-4">
-        <div className="restock card" style={{color: '#D31145', background: '#d5d5d5'}}>Item Reciever</div>
+        <Link to='/reciever'>
+          <div className="restock card">Recieve Items</div>
+        </Link>
         <Link to='/inv'> 
-            <div className="searchInventory card" style={{color: '#D31145', background: '#d5d5d5'}}>Search Inventory</div>
+            <div className="searchInventory card">Search Inventory</div>
         </Link> 
-        <div className="stickerRequest card" style={{color: '#D31145', background: '#d5d5d5'}}>Request Stickers</div>
-        <div className="stickerRequest card" style={{color: '#D31145', background: '#d5d5d5'}}>Card #4</div>
+        <Link to='/stickers'>
+        <div className="stickerRequest card">Request Stickers</div>
+        </Link>
+        <div className="i card">Card #4</div>
         
     </div>
   )

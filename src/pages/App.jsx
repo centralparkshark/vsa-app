@@ -5,11 +5,12 @@ import {onAuthStateChanged} from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import useStore from './login/store';
 
-import {Home, Settings, NoPage, Restock, Login, Inventory, ItemPage} from '.'
-import PublicOnlyRoute from '../components/PublicOnlyRoute';
-import PrivateRoute from '../components/PrivateRoute';
+import {Home, Settings, NoPage, Restock, Login, Inventory, ItemPage, ItemReciever, Stickers} from '.'
+import PublicOnlyRoute from './login/PublicOnlyRoute';
+import PrivateRoute from './login/PrivateRoute';
 
 function App() {
+  //need to fix routing so it doesnt refresh to login screen
   const {setLoginStatus} = useStore();
   
   useEffect(() => {
@@ -28,7 +29,11 @@ function App() {
           <Route path="/home" element = {<PrivateRoute Component={Home}/>}/>
           <Route path="/inv" element = {<PrivateRoute Component={Inventory}/>}/>
           <Route path="/restock" element = {<PrivateRoute Component={Restock}/>}/>
-          <Route path="/restock/:id" element = {<PrivateRoute Component={ItemPage}/>}/>
+          <Route path="/item/:id" element = {<PrivateRoute Component={ItemPage}/>}/>
+          
+          <Route path="/reciever" element = {<PrivateRoute Component={ItemReciever}/>}/>
+          <Route path="/stickers" element = {<PrivateRoute Component={Stickers}/>}/>
+
           <Route path="/settings" element = {<PrivateRoute Component={Settings}/>}/>
           <Route path="*" element = {<NoPage />}/>
         </Routes>

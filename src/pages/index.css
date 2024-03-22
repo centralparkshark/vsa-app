@@ -47,6 +47,7 @@ button {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
   color: #D31145;
   background-color: #d5d5d5;
+  width: fit-content;
 }
 
 .title {
@@ -111,14 +112,31 @@ ul {
 }
 
 input {
-  line-height: 1.6rem;
+  line-height: 2.8rem;
+  font-size: 1.6rem;
   background-color: #c3c1c1;
-  border: none;
-  border-radius: 50px;
-  padding: 0px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: .5rem 2rem;
   max-width: 240px;
+  color:#2B2B2B;
+}
+
+input[type='checkbox'] {
+  width: 1.2em;
+  height: 1.2em;
+  cursor: pointer;
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  button { 
+    @apply text-hhcRed bg-hhcWhite px-2 /* hover:bg-violet-600*/;
+  }
+  /* input[type='text'] {
+    @apply text-slate-300;
+  } */
+}

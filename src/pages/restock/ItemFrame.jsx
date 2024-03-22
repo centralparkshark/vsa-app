@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../../firebase-config'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const ItemFrame = ({item}) => {
 //   //DOM refs
@@ -15,23 +16,24 @@ const ItemFrame = ({item}) => {
 
     const handleClick = async () => {
         
-        //set restockNeeded to 0
-        const itemRef = doc(db, 'inventory', item.id)
-        //search database by id        
-        try {
-            await updateDoc(itemRef, {
-                restockNeeded: 0,
-            },
-            setVisible(false)
-            );
-        } catch (error) {
-            console.error('Error getting document: ', error)
-        }    
+    //     //set restockNeeded to 0
+    //     const itemRef = doc(db, 'inventory', item.id)
+    //     //search database by id        
+    //     try {
+    //         await updateDoc(itemRef, {
+    //             restockNeeded: 0,
+    //         },
+    //         setVisible(false)
+    //         );
+    //     } catch (error) {
+    //         console.error('Error getting document: ', error)
+    //     }    
     }
 
 
 
   return visible ? (
+<Link  key={item.id} to = {`/item/${item.id}`} {...item}>
     <div className="wrapper" onClick={handleClick}>
         {/* <div className='backgroundLeft'>
             <span>Check</span>
@@ -62,6 +64,7 @@ const ItemFrame = ({item}) => {
             </div>
         </div>
     </div>
+</Link>
   ) : null;
 }
 

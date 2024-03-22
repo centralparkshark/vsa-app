@@ -76,12 +76,6 @@ function Home() {
         <div className="box">
             <SectionFocus />
         </div>
-        {/*TO-DO: make a working to-do list section*/}
-        <div className="box">
-            <TaskList />
-        </div>
-        
-        
 
         {/*TO-DO: only generate either of these if not zero */}
         {/*TO-DO: have restock num actually generate*/}
@@ -101,6 +95,10 @@ function Home() {
             </Link> 
             {/*TO-DO: make inv part of a bar at the bottom*/}
             
+        </div>
+        {/*TO-DO: make a working to-do list section*/}
+        <div className="box">
+            <TaskList />
         </div>
         <div>{navBar}</div>
         <div className='center flex justify-center'>
