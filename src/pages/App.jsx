@@ -5,7 +5,7 @@ import {onAuthStateChanged} from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import useStore from './login/store';
 
-import {Home, Settings, NoPage, Restock, Login, Inventory, ItemPage, ItemReciever, Stickers} from '.'
+import {Home, Settings, NoPage, Restock, Login, Inventory, ItemPage, ItemReceiver, Stickers} from '.'
 import PublicOnlyRoute from './login/PublicOnlyRoute';
 import PrivateRoute from './login/PrivateRoute';
 
@@ -31,7 +31,7 @@ function App() {
           <Route path="/restock" element = {<PrivateRoute Component={Restock}/>}/>
           <Route path="/item/:id" element = {<PrivateRoute Component={ItemPage}/>}/>
           
-          <Route path="/reciever" element = {<PrivateRoute Component={ItemReciever}/>}/>
+          <Route path="/receiver" element = {<PrivateRoute Component={ItemReceiver}/>}/>
           <Route path="/stickers" element = {<PrivateRoute Component={Stickers}/>}/>
 
           <Route path="/settings" element = {<PrivateRoute Component={Settings}/>}/>

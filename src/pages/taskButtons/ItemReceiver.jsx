@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const ItemReciever = () => {
+const ItemReceiver = () => {
   return (
     <div className="bento">
         <Link to='/home'><p>Back</p></Link>
@@ -9,4 +9,4 @@ const ItemReciever = () => {
   )
 }
 
-export default ItemReciever
+export default ItemReceiver

@@ -33,6 +33,8 @@ const AuthScreen = () => {
     return <Loading />
   }
   
+ //to-do: display login errors to screen
+
 
   return (
     <div className="bento justify-center items-center h-screen">

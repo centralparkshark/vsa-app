@@ -15,6 +15,10 @@ function Restock() {
     const [itemFrames, setItemFrames] = useState([]);
    const [isLoading, setIsLoading] = useState(false)
    
+const handleClear = () => {
+    //for each, set restockNeeded 0;
+}
+
     useEffect(() => {
         const fetchData = async () => {
             //setIsLoading(true)
@@ -65,7 +69,7 @@ function Restock() {
                     ))}
                 </div>
             </div>}
-
+<div className='card ' onClick={handleClear}>Clear All</div>
             <CSVUploader></CSVUploader>
 
         </div>
