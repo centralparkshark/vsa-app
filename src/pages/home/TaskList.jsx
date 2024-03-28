@@ -45,9 +45,10 @@ const TaskList = () => {
   };
   
   const handleChange = (e) => {
+    const {name, value} = e.target
     setTask({
         ...task,
-        [e.target.name]: e.target.value
+        [name]: value
     })
   }
 
@@ -112,8 +113,11 @@ const handleToggleTask = async (taskId) => {
         {displayInput.displayed && <input 
           type="text"
           className=' card h-6 text-left'
+          placeholder='Start typing task..'
           onChange={handleChange}
           name='taskName'
+          value={task.taskName}
+          autoFocus
         />}
         <div className="addButton card max-w-fit px-2 py-1" onClick={handleDisplay} style={{ background: displayInput.displayed ? '#D31145' : ''}}>{displayInput.text}</div>
         {taskList.length > 0 && <div className="deleteButton card max-w-fit px-2 py-1" onClick={handleDelete}>Clear Completed Tasks</div>}      </div>
