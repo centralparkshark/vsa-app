@@ -33,9 +33,11 @@ const TaskList = () => {
     }, []);
 
   //shows/hides input box
-  const handleDisplay = () => {
-      if (displayInput.displayed === true) {
+  const handleDisplay = (submit) => {
+    submit.preventDefault();
+    if (displayInput.displayed === true) {
         handleAdd();
+        setTask({ taskName: '', completed: false });
       }
       setDisplayInput(prevState => ({
         ...prevState,
@@ -54,16 +56,18 @@ const TaskList = () => {
 
   //adds item to DB
   const handleAdd = async () => {
-    const newTask = {
-      taskName: task.taskName,
-      completed: task.completed,
-    };
-    try {
-      const docRef = await addDoc(tasksInDb, newTask);
-      newTask.id = docRef.id; // Update id after adding to Firestore
-      setTaskList(prevTaskList => [...prevTaskList, newTask]);
-    } catch (error) {
-      console.error('Error adding item:', error);
+    if (task.taskName.length > 1) {
+      const newTask = {
+        taskName: task.taskName,
+        completed: task.completed,
+      };
+      try {
+        const docRef = await addDoc(tasksInDb, newTask);
+        newTask.id = docRef.id; // Update id after adding to Firestore
+        setTaskList(prevTaskList => [...prevTaskList, newTask]);
+      } catch (error) {
+        console.error('Error adding item:', error);
+      }
     }
   };
 
@@ -109,19 +113,28 @@ const handleToggleTask = async (taskId) => {
           </li>
         ))}
       </ul>
-      <div className=' flex place-content-between'>
-        {displayInput.displayed && <input 
-          type="text"
-          className=' card h-6 text-left'
-          placeholder='Start typing task..'
-          onChange={handleChange}
-          name='taskName'
-          value={task.taskName}
-          autoFocus
-        />}
-        <div className="addButton card max-w-fit px-2 py-1" onClick={handleDisplay} style={{ background: displayInput.displayed ? '#D31145' : ''}}>{displayInput.text}</div>
-        {taskList.length > 0 && <div className="deleteButton card max-w-fit px-2 py-1" onClick={handleDelete}>Clear Completed Tasks</div>}      </div>
-      </div>
+      <form onSubmit={handleDisplay} className="max-w-screen mx-auto">
+        <div className=' flex gap-4 flex-wrap w-full justify-end'>
+          <div className='inputAdd flex gap-4 w-full'>
+            {displayInput.displayed && <input 
+              type="text"
+              className=' card h-6 text-left w-full'
+              placeholder='Start typing task..'
+              onChange={handleChange}
+              name='taskName'
+              value={task.taskName}
+              autoFocus
+              autoComplete='off'
+            />}
+            <button className="addButton card max-w-fit px-2 py-1 text-hhcWhite" 
+              type="submit" style={{ background: displayInput.displayed ? '#D31145' : '#494949'}}>
+                {displayInput.text}
+              </button>
+          </div>
+          {taskList.length > 0 && <button className="deleteButton card max-w-fit px-2 py-1 text-hhcWhite justify-end" type="button" onClick={handleDelete} style={{ background: '#353535'}}>Clear Completed Tasks</button>}      
+        </div>
+      </form>
+    </div>
   )
 }
 
