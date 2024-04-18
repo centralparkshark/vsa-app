@@ -8,6 +8,7 @@ import Loading from '../../components/loading/Loading';
 import SectionFocus from './SectionFocus'
 import TaskList from './TaskList';
 import Cards from './Cards';
+import MainButton from '../../components/MainButton';
 //import Sidebar from './Sidebar';
 
 let restockNum = 23; //to-do: need to get from backend logic
@@ -84,14 +85,14 @@ function Home() {
                 restockNum === 1 && <h2>{restockNum} item needed</h2>}
 
             <Link to='/restock'> 
-                <button className="restock--button px-4 py-1 text-3xl">Restock</button>
+                <MainButton>Restock</MainButton>
             </Link> 
 
             {/*To-DO: Link to online pull numbers and fix link*/}
             {restockNum > 1 ? <h2>{restockNum} items needed</h2> : 
                 restockNum === 1 && <h2>{restockNum} item needed</h2>}
             <Link to=''> 
-                <button className="online--button px-4 py-1 text-3xl">Online Pull</button>
+                <MainButton>Online Pull</MainButton>
             </Link> 
             {/*TO-DO: make inv part of a bar at the bottom*/}
             

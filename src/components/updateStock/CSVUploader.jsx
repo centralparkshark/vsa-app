@@ -5,6 +5,10 @@ import queryCollection from './QueryCollection';
 import addNewItem from './AddNewItem';
 import updateItem from './UpdateItem';
 
+import MainButton from '../MainButton';
+import { MdFileUpload } from "react-icons/md";
+
+
 const CSVUploader = () => {
     //const [searchSKU, setSearchSKU] = useState(null)
     const [needUpload, setNeedUpload] = useState(true);
@@ -54,11 +58,15 @@ const CSVUploader = () => {
   
 const changeButton = () => {
     setNeedUpload(false)
+    console.log('test')
   }
 
   if (needUpload)  {
     return (
-        <button className='bg-slate-100 w-1/6 text-gray-700' onClick={changeButton}>Update Data</button>
+        <MainButton onClick={changeButton} size="small">
+          <MdFileUpload />
+          Update Data
+        </MainButton>
     )
   } else {
   return (
