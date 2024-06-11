@@ -25,7 +25,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index path='/' element = {<PublicOnlyRoute Component={Login} />} />
+          <Route index element = {<PublicOnlyRoute Component={Login} />} />
           <Route path="/home" element = {<PrivateRoute Component={Home}/>}/>
           <Route path="/inv" element = {<PrivateRoute Component={Inventory}/>}/>
           <Route path="/restock" element = {<PrivateRoute Component={Restock}/>}/>

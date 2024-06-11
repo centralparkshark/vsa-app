@@ -1,46 +1,12 @@
 import PropTypes from 'prop-types'
-import { doc, updateDoc } from 'firebase/firestore'
-import { db } from '../../../firebase-config'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const ItemFrame = ({item}) => {
-//   //DOM refs
-//   wrapper // holds everything
-//   itemFrame //holds data
-//   backgroundLeft // holds quick check  function
-//   backgroundRight // holds edit function
+    const { id, itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, } = item;
 
-    const { itemName, restockNeeded, totalItemQty, backstockLocation, itemPic, } = item
-    const [visible, setVisible] = useState(true)
-
-    const handleClick = async () => {
-        
-    //     //set restockNeeded to 0
-    //     const itemRef = doc(db, 'inventory', item.id)
-    //     //search database by id        
-    //     try {
-    //         await updateDoc(itemRef, {
-    //             restockNeeded: 0,
-    //         },
-    //         setVisible(false)
-    //         );
-    //     } catch (error) {
-    //         console.error('Error getting document: ', error)
-    //     }    
-    }
-
-
-
-  return visible ? (
-<Link  key={item.id} to = {`/item/${item.id}`} {...item}>
-    <div className="wrapper" onClick={handleClick}>
-        {/* <div className='backgroundLeft'>
-            <span>Check</span>
-        </div>
-        <div className="backgroundRight">
-            <span>Edit</span>
-        </div> */}
+    return (
+        <Link to = {`/item/${id}`} key={id} item={item}>
+    <div className="wrapper">
         <div className="itemFrame box-2">
             <div className="leftInfo">
                 {itemPic ? 
@@ -65,7 +31,7 @@ const ItemFrame = ({item}) => {
         </div>
     </div>
 </Link>
-  ) : null;
+  );
 }
 
 ItemFrame.propTypes = {
@@ -80,27 +46,5 @@ ItemFrame.propTypes = {
         itemPic: PropTypes.string,
     })
 }
-
-//To-Do: Use this to create a dragable cards eventually
-//https://malcoded.com/posts/react-swipeable-list/
-// constructor(props) {
-//     super(props);
-
-//     this.itemFrame = null;
-//     this.wrapper = null;
-//     this.backgroundLeft = null;
-//     this.backgroundRight = null;
-
-//     this.onMouseMove = this.onMouseMove.bind(this);
-//     this.onTouchMove = this.onTouchMove.bind(this);
-//     this.onDragStartMouse = this.onDragStartMouse.bind(this);
-//     this.onDragStartTouch = this.onDragStartTouch.bind(this);
-//     this.onDragEndMouse = this.onDragEndMouse.bind(this);
-//     this.onDragEndTouch = this.onDragEndTouch.bind(this);
-//     this.onDragEnd = this.onDragEnd.bind(this);
-//     this.updatePosition = this.updatePosition.bind(this);
-//     this.onSwiped= this.onSwiped.bind(this);
-//   }
-
 
 export default ItemFrame

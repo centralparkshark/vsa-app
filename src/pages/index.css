@@ -6,8 +6,8 @@
 
   /* color-scheme: light dark; */
   color: #d5d5d5;
-  background-color: #242424;
-  background: linear-gradient(180deg, black 0%, #2B2B2B 100%);
+  background: #D31145;
+  background: linear-gradient(0deg, rgba(29,29,29,1) 4%, rgba(74,74,74,1) 100%);
   background-repeat: no-repeat;
 
   font-synthesis: none;
@@ -19,7 +19,6 @@
 html {
   overscroll-behavior: none;
 }
-
 
 * {
   margin: 0;
@@ -33,6 +32,12 @@ body {
   margin: 0;
   display: flex;
   min-height: 100vh;
+
+  background-color: #1f1f1f;
+  background-image: 
+      radial-gradient(at 7% 3%, hsl(343.92, 85%, 45%) 0, transparent 59%), 
+      radial-gradient(at 87% 100%, hsla(344, 85%, 45%, 0.23) 0, transparent 59%), 
+      radial-gradient(at 82% 65%, hsl(0, 0%, 12%) 0, transparent);
 }
 
 button {
@@ -63,7 +68,10 @@ button {
 
 .box { 
   padding: 20px;
-  background: #282828;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(33, 33, 33, 0.85);
+  border: 2px solid rgba(255, 255, 255, .125);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -139,4 +147,8 @@ input[type='checkbox'] {
   /* input[type='text'] {
     @apply text-slate-300;
   } */
+}
+
+::selection {
+  background-color: #D31145;
 }

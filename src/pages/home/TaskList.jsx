@@ -98,7 +98,7 @@ const handleToggleTask = async (taskId) => {
 };
 
   return (
-    <div>
+    <div className='task-container flex flex-col place-content-between h-full'>
       <ul className=' pb-2'>
         {taskList.map((task) => (
           <li key={task.id} className=' flex gap-2 py-2'>
@@ -113,7 +113,7 @@ const handleToggleTask = async (taskId) => {
           </li>
         ))}
       </ul>
-      <form onSubmit={handleDisplay} className="max-w-screen mx-auto">
+      <form onSubmit={handleDisplay} className="flex flex-col w-full">
         <div className=' flex gap-4 flex-wrap w-full justify-end'>
           <div className='inputAdd flex gap-4 w-full'>
             {displayInput.displayed && <input 
@@ -131,9 +131,12 @@ const handleToggleTask = async (taskId) => {
                 {displayInput.text}
               </button>
           </div>
-          {taskList.length > 0 && <button className="deleteButton card max-w-fit px-2 py-1 text-hhcWhite justify-end" type="button" onClick={handleDelete} style={{ background: '#353535'}}>Clear Completed Tasks</button>}      
+          
         </div>
       </form>
+      <div className=" mt-auto pt-4 flex justify-end">
+              {taskList.length > 0 && <button className="deleteButton card max-w-fit px-2 py-1 text-hhcWhite" type="button" onClick={handleDelete} style={{ background: '#353535'}}>Clear Completed Tasks</button>}      
+          </div>
     </div>
   )
 }

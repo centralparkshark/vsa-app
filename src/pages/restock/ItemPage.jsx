@@ -1,20 +1,32 @@
 import { Link } from "react-router-dom"
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../../firebase-config'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from 'prop-types'
-
-let itemInfo; 
+import { useParams } from "react-router-dom";
 
 const ItemPage = ({item}) => {
+  const { id } = useParams();
+  console.log(item)
+  const [itemInfo, setItemInfo] = useState(null); 
+
+useEffect(() => {
+
   async function fetchItemInfo() {
-    const itemRef = doc(db, 'users', item.id)
-        try {
+    if (!id) {
+      console.error('Item ID is undefined');
+      return;
+    }
+
+    console.log('Fetching item info for item ID:', id);
+    const itemRef = doc(db, 'inventory', id);
+    try {
             const docSnap = await getDoc(itemRef);
             if (docSnap.exists()) {
-              const data = doc.data();  
-              itemInfo = {
-                id: doc.id,
+              const data = docSnap.data();  
+              console.log('Item data retrieved:', data); 
+              setItemInfo({
+                id: docSnap.id,
                 itemSKU: data.itemSKU,
                 itemName: data.itemName,
                 restockNeeded: data.restockNeeded,
@@ -23,20 +35,24 @@ const ItemPage = ({item}) => {
                 backstockLocation: data.backstockLocation,
                 itemPic: data.itemPic,
                 //to-do: figure out photo adding logic
-              }
+              });
             }
         } catch (error) {
             console.error('Error getting document: ', error)
         }    
     }
 
-useEffect(() => {
-  fetchItemInfo();
-}, []);
+    fetchItemInfo();
+  }, [id]);
+
+if (!itemInfo) {
+  return <div>Loading..</div>
+}
+
 
 ItemPage.propTypes = {
   item: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.string.isRequired,
       itemSKU: PropTypes.string,
       itemName: PropTypes.string,
       restockNeeded: PropTypes.number,
@@ -44,19 +60,22 @@ ItemPage.propTypes = {
       totalItemQty: PropTypes.number,
       backstockLocation: PropTypes.array,
       itemPic: PropTypes.string,
-  })
-}
-
-
+  }).isRequired
+};
 
 
   return (
-    <div className="bento">
+    <div className="bento flex">
         <Link to='/restock'><p>Back</p></Link>
-        <div className="box items-center">
-          <div className="itemPic">Picture</div>
-          <div className="itemName font-extrabold text-2xl">{itemInfo.itemName}</div>
-          <div className="backstockLocation">Location: Bin 4C</div>
+        <div className="box items-center place-self-center min-w-[30vw] md:max-w-[40vw] max-w-[85vw]">
+          <div className="itemPic">
+            <img src="../../assets/012404.jpg" alt="`${itemInfo.itemName}`" />
+          </div>
+          <div className="itemName text-center font-extrabold text-2xl">{itemInfo.itemName}</div>
+          <div className="inBackstock">In Backstock: {itemInfo.totalItemQty}</div>
+          <div className="backstockLocation">Location: {itemInfo.backstockLocation}</div>
+          
+          <div className="qtyNeeded">Need: {itemInfo.restockNeeded}</div>
           <button className="">Got it!</button>
           <div className=" text-red-600">Can&apos;t find item?</div>
         </div>

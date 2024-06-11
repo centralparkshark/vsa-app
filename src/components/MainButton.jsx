@@ -20,7 +20,7 @@ let buttonSize;
 }
 
 MainButton.propTypes = {
-    children: PropTypes.string,
+    children: PropTypes.node,
     size: PropTypes.string,
 }
 
