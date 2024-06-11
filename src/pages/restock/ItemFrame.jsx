@@ -6,11 +6,11 @@ const ItemFrame = ({item}) => {
 
     return (
         <Link to = {`/item/${id}`} key={id} item={item}>
-    <div className="wrapper">
-        <div className="itemFrame box-2">
-            <div className="leftInfo">
+    <div className="wrapper h-full">
+        <div className="itemFrame box-2 h-full grid grid-cols-3">
+            <div className="leftInfo flex col-span-2 items-center">
                 {itemPic ? 
-                <img src={itemPic} alt={itemName} /> : 
+                <img className=" h-14" src={itemPic} alt={itemName} /> : 
                 <img src="https://picsum.photos/50" alt="randomly generated" />
                 } 
                         <div className="itemInfo">
@@ -18,7 +18,7 @@ const ItemFrame = ({item}) => {
                             <h4 className="location">{backstockLocation}</h4>
                         </div>
                     </div>
-                    <div className="rightInfo">
+            <div className="rightInfo flex flex-col justify-center">
                         <div className="numNeededInfo">
                             <p>Restock Needed:</p>
                             <p>{restockNeeded}</p>

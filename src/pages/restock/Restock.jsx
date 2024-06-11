@@ -10,11 +10,10 @@ import Loading from '../../components/loading/Loading';
 
 function Restock() {
     const [itemFrames, setItemFrames] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
-            //setIsLoading(true)
             try {
                 const querySnapshot = await getDocs(collection(db, "inventory"));
                 const fetchedItems = querySnapshot.docs.map(doc => {
@@ -25,10 +24,10 @@ function Restock() {
                     };
                 });
                 setItemFrames(fetchedItems);
-                setIsLoading(false)
             } catch (error) {
                 console.error('Error retrieving items:', error);
-                setIsLoading(false)
+            } finally {
+                setIsLoading(false);
             }
         };
     
@@ -49,16 +48,15 @@ function Restock() {
             {itemFrames.length === 0 && <div className="f text-center bg-red-800">All items collected!</div>}
             {itemFrames.length > 0 && (<div>
                 <h1 className="title">Items Needed:</h1>
-                <div className="bento p-0">
+                <div className="p-2 grid grid-cols-1 auto-rows-fr gap-2">
                     {/* //need to render one for each w/ restock value > their restock limit */}
                     {itemFrames.map(item => (  
                         <ItemFrame key={item.id} item={item}/>
                     ))}
                 </div>
             </div>)}
-<div className='card ' onClick={handleClear}>Clear All</div>
+            <div className='card' onClick={handleClear}>Clear All</div>
             <CSVUploader></CSVUploader>
-
         </div>
     )
 }

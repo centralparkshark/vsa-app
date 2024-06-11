@@ -103,7 +103,7 @@ function Home() {
                     <TaskList />
                 </div> 
                 <div className="graph box md:col-span-2">
-                    <img className=" h-96 m-auto" src='../../../public/imgs/tempStoreMap.jpg' alt="Map Layout of Store" />
+                    <img className=" h-96 m-auto" src='/imgs/tempStoreMap.jpg' alt="Map Layout of Store" />
                 </div>
             </div>
             <div>{navBar}</div>      

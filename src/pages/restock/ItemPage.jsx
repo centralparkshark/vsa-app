@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 
 const ItemPage = ({item}) => {
   const { id } = useParams();
-  console.log(item)
   const [itemInfo, setItemInfo] = useState(null); 
 
 useEffect(() => {
@@ -18,13 +17,11 @@ useEffect(() => {
       return;
     }
 
-    console.log('Fetching item info for item ID:', id);
     const itemRef = doc(db, 'inventory', id);
     try {
             const docSnap = await getDoc(itemRef);
             if (docSnap.exists()) {
               const data = docSnap.data();  
-              console.log('Item data retrieved:', data); 
               setItemInfo({
                 id: docSnap.id,
                 itemSKU: data.itemSKU,
@@ -45,7 +42,7 @@ useEffect(() => {
     fetchItemInfo();
   }, [id]);
 
-if (!itemInfo) {
+if (!itemInfo && !item) {
   return <div>Loading..</div>
 }
 
@@ -60,7 +57,7 @@ ItemPage.propTypes = {
       totalItemQty: PropTypes.number,
       backstockLocation: PropTypes.array,
       itemPic: PropTypes.string,
-  }).isRequired
+  })
 };
 
 
@@ -68,9 +65,10 @@ ItemPage.propTypes = {
     <div className="bento flex">
         <Link to='/restock'><p>Back</p></Link>
         <div className="box items-center place-self-center min-w-[30vw] md:max-w-[40vw] max-w-[85vw]">
-          <div className="itemPic">
-            <img src="../../assets/012404.jpg" alt="`${itemInfo.itemName}`" />
-          </div>
+          {itemInfo.itemPic ? 
+            <img className=" h-14" src={itemInfo.itemPic} alt={itemInfo.itemName} /> : 
+            <img src="https://picsum.photos/50" alt="randomly generated" />
+          } 
           <div className="itemName text-center font-extrabold text-2xl">{itemInfo.itemName}</div>
           <div className="inBackstock">In Backstock: {itemInfo.totalItemQty}</div>
           <div className="backstockLocation">Location: {itemInfo.backstockLocation}</div>
