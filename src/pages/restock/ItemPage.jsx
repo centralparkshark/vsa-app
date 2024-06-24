@@ -1,19 +1,17 @@
-import { Link } from "react-router-dom"
-import { doc, getDoc } from 'firebase/firestore'
+import { Link, useParams, useNavigate} from "react-router-dom"
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../../../firebase-config'
 import { useEffect, useState } from "react";
 import PropTypes from 'prop-types'
-import { useParams } from "react-router-dom";
 
 const ItemPage = ({item}) => {
   const { id } = useParams();
-  const [itemInfo, setItemInfo] = useState(null); 
+  const navigate = useNavigate();
+  const [itemInfo, setItemInfo] = useState(item || null); 
 
 useEffect(() => {
-
   async function fetchItemInfo() {
-    if (!id) {
-      console.error('Item ID is undefined');
+    if (!id || item) {
       return;
     }
 
@@ -39,27 +37,30 @@ useEffect(() => {
         }    
     }
 
-    fetchItemInfo();
-  }, [id]);
+    if (!item) {
+      fetchItemInfo();
+    }
+  }, [id, item]);
 
-if (!itemInfo && !item) {
-  return <div>Loading..</div>
+const handleClear = async () => {
+      try {
+        if (itemInfo && itemInfo.id) {
+          const itemRef = doc(db, 'inventory', itemInfo.id);
+          await updateDoc(itemRef, { restockNeeded: 0 });
+          setItemInfo(prevState => ({
+            ...prevState,
+            restockNeeded: 0
+          }));
+          navigate(-1);
+        }
+      } catch (error) {
+          console.error('Error updating items:', error);
+      }
+  }
+
+if (!itemInfo) {
+  return <div>Loading..</div>;
 }
-
-
-ItemPage.propTypes = {
-  item: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      itemSKU: PropTypes.string,
-      itemName: PropTypes.string,
-      restockNeeded: PropTypes.number,
-      restockLimit: PropTypes.number,
-      totalItemQty: PropTypes.number,
-      backstockLocation: PropTypes.array,
-      itemPic: PropTypes.string,
-  })
-};
-
 
   return (
     <div className="bento flex">
@@ -74,12 +75,25 @@ ItemPage.propTypes = {
           <div className="backstockLocation">Location: {itemInfo.backstockLocation}</div>
           
           <div className="qtyNeeded">Need: {itemInfo.restockNeeded}</div>
-          <button className="">Got it!</button>
+          <button className="" onClick={handleClear} >Got it!</button>
           <div className=" text-red-600">Can&apos;t find item?</div>
         </div>
     </div>
     )
  }
 
+
+ ItemPage.propTypes = {
+  item: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      itemSKU: PropTypes.string,
+      itemName: PropTypes.string,
+      restockNeeded: PropTypes.number,
+      restockLimit: PropTypes.number,
+      totalItemQty: PropTypes.number,
+      backstockLocation: PropTypes.array,
+      itemPic: PropTypes.string,
+  })
+};
 
  export default ItemPage

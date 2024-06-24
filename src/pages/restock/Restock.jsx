@@ -4,7 +4,7 @@ import CSVUploader from '../../components/updateStock/CSVUploader';
 import ItemFrame from './ItemFrame';
 import { useEffect, useState } from 'react';
 import { db } from '../../../firebase-config';
-import {collection, getDocs, updateDoc, doc} from 'firebase/firestore';
+import {collection, getDocs, updateDoc, doc, writeBatch} from 'firebase/firestore';
 import Loading from '../../components/loading/Loading';
 //To-Do: loading doesnt work 
 
@@ -37,16 +37,17 @@ function Restock() {
     const handleClear = async () => {
         if (window.confirm('Are you sure you want to clear all items?')) {
             try {
+                const batch = writeBatch(db);
+                itemFrames.forEach(item => {
+                    const itemRef = doc(db, 'inventory', item.id);
+                    batch.update(itemRef, { restockNeeded: 0 });
+                });
+                await batch.commit();
+
                 const updatedItems = itemFrames.map(item => ({
                     ...item,
                     restockNeeded: 0
                 }));
-
-                for (const item of updatedItems) {
-                    const itemRef = doc(db, 'inventory', item.id);
-                    await updateDoc(itemRef, { restockNeeded: 0 });
-                }
-
                 setItemFrames(updatedItems);
             } catch (error) {
                 console.error('Error updating items:', error);
